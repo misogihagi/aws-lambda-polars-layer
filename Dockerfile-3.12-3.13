@@ -1,4 +1,4 @@
-ARG=3.9-arm64
+ARG="3.11-arm64"
 FROM public.ecr.aws/lambda/python:$TAG
 
 RUN dnf install zip -y
