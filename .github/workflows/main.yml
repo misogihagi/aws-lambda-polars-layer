@@ -1,0 +1,41 @@
+name: Docker Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # vから始まるタグがプッシュされたときに実行
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: チェックアウト
+      uses: actions/checkout@v3
+
+    - name: Docker イメージをビルドする
+      run: |
+        docker build -f Dockerfile-3.9-3.11 -t layer --build-arg=3.9-arm64
+        docker run -v `pwd`:/output
+        mv layer.zip polars-layer-3.9-arm64.zip
+
+    - name: リリースを作成する
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: 成果物をリリースにアップロードする
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./my-app-image.tar
+        asset_name: my-app-image.tar
+        asset_content_type: application/x-tar
