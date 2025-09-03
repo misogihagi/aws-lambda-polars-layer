@@ -1,0 +1,22 @@
+ARG=3.9-arm64
+FROM public.ecr.aws/lambda/python:$TAG
+
+RUN yum install zip -y
+
+WORKDIR /var/task
+
+RUN <<EOI
+cat <<EOF > /entrypoint.sh
+#!/bin/bash
+
+pip install polars -t python # polarsは依存ライブラリが少ないのも嬉しいポイントです。polars[all]を指定すれば、追加機能もインストールできますが、今回は最小構成で進めました。
+
+zip -r /layer.zip python
+
+cp /layer.zip /output/layer.zip
+EOF
+EOI
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
