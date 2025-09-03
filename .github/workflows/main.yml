@@ -6,7 +6,7 @@ on:
       - 'v*' # vから始まるタグがプッシュされたときに実行
 
 jobs:
-  build-and-release:
+  build-and-release-arm64:
     permissions:
       contents: write
     runs-on: ubuntu-24.04-arm
@@ -20,6 +20,18 @@ jobs:
         docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg=3.9-arm64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.9-arm64.zip
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg=3.10-arm64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.10-arm64.zip
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg=3.11-arm64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.11-arm64.zip
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/arm64 --build-arg=3.12-arm64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.12-arm64.zip
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/arm64 --build-arg=3.13-arm64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.13-arm64.zip
 
     - name: リリースを作成する
       id: create_release
@@ -32,12 +44,111 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: 成果物をリリースにアップロードする
-      uses: actions/upload-release-asset@v1
+    - uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./polars-layer-3.9-arm64.zip
         asset_name: polars-layer-3.9-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.10-arm64.zip
+        asset_name: polars-layer-3.10-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.11-arm64.zip
+        asset_name: polars-layer-3.11-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.12-arm64.zip
+        asset_name: polars-layer-3.12-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.13-arm64.zip
+        asset_name: polars-layer-3.13-arm64.zip
+        asset_content_type: application/zip
+
+  build-and-release-amd64:
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: チェックアウト
+      uses: actions/checkout@v3
+
+    - name: Docker イメージをビルドする
+      run: |
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg=3.9-x86_64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.9-x86_64.zip
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg=3.10-x86_64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.10-x86_64.zip
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg=3.11-x86_64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.11-x86_64.zip
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/amd64 --build-arg=3.12-x86_64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.12-x86_64.zip
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/amd64 --build-arg=3.13-x86_64
+        docker run -v `pwd`:/output layer
+        mv layer.zip polars-layer-3.13-x86_64.zip
+
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.9-arm64.zip
+        asset_name: polars-layer-3.9-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.10-arm64.zip
+        asset_name: polars-layer-3.10-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.11-arm64.zip
+        asset_name: polars-layer-3.11-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.12-arm64.zip
+        asset_name: polars-layer-3.12-arm64.zip
+        asset_content_type: application/zip
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./polars-layer-3.13-arm64.zip
+        asset_name: polars-layer-3.13-arm64.zip
         asset_content_type: application/zip
