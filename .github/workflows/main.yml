@@ -122,38 +122,38 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
-        asset_path: ./polars-layer-3.9-arm64.zip
-        asset_name: polars-layer-3.9-arm64.zip
+        asset_path: ./polars-layer-3.9-x86_64.zip
+        asset_name: polars-layer-3.9-x86_64.zip
         asset_content_type: application/zip
     - uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
-        asset_path: ./polars-layer-3.10-arm64.zip
-        asset_name: polars-layer-3.10-arm64.zip
+        asset_path: ./polars-layer-3.10-x86_64.zip
+        asset_name: polars-layer-3.10-x86_64.zip
         asset_content_type: application/zip
     - uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
-        asset_path: ./polars-layer-3.11-arm64.zip
-        asset_name: polars-layer-3.11-arm64.zip
+        asset_path: ./polars-layer-3.11-x86_64.zip
+        asset_name: polars-layer-3.11-x86_64.zip
         asset_content_type: application/zip
     - uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
-        asset_path: ./polars-layer-3.12-arm64.zip
-        asset_name: polars-layer-3.12-arm64.zip
+        asset_path: ./polars-layer-3.12-x86_64.zip
+        asset_name: polars-layer-3.12-x86_64.zip
         asset_content_type: application/zip
     - uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
-        asset_path: ./polars-layer-3.13-arm64.zip
-        asset_name: polars-layer-3.13-arm64.zip
+        asset_path: ./polars-layer-3.13-x86_64.zip
+        asset_name: polars-layer-3.13-x86_64.zip
         asset_content_type: application/zip
