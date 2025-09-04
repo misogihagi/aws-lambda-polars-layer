@@ -6,11 +6,10 @@ on:
       - 'v*' # vから始まるタグがプッシュされたときに実行
 
 jobs:
-  build-and-release-arm64:
+  create-upload-destination:
     permissions:
       contents: write
-    runs-on: ubuntu-24.04-arm
-
+    runs-on: ubuntu-24.04
     steps:
     - name: リリースを作成する
       id: create_release
@@ -23,6 +22,11 @@ jobs:
         draft: false
         prerelease: false
 
+  build-and-release-arm64:
+    needs: create-upload-destination
+    runs-on: ubuntu-24.04-arm
+
+    steps:
     - name: チェックアウト
       uses: actions/checkout@v3
 
@@ -86,8 +90,7 @@ jobs:
         asset_content_type: application/zip
 
   build-and-release-amd64:
-    permissions:
-      contents: write
+    needs: create-upload-destination
     runs-on: ubuntu-24.04
 
     steps:
