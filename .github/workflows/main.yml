@@ -10,6 +10,8 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-24.04
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
     - name: リリースを作成する
       id: create_release
@@ -52,7 +54,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.9-arm64.zip
         asset_name: polars-layer-3.9-arm64.zip
         asset_content_type: application/zip
@@ -60,7 +62,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.10-arm64.zip
         asset_name: polars-layer-3.10-arm64.zip
         asset_content_type: application/zip
@@ -68,7 +70,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.11-arm64.zip
         asset_name: polars-layer-3.11-arm64.zip
         asset_content_type: application/zip
@@ -76,7 +78,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.12-arm64.zip
         asset_name: polars-layer-3.12-arm64.zip
         asset_content_type: application/zip
@@ -84,7 +86,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.13-arm64.zip
         asset_name: polars-layer-3.13-arm64.zip
         asset_content_type: application/zip
@@ -119,7 +121,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.9-arm64.zip
         asset_name: polars-layer-3.9-arm64.zip
         asset_content_type: application/zip
@@ -127,7 +129,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.10-arm64.zip
         asset_name: polars-layer-3.10-arm64.zip
         asset_content_type: application/zip
@@ -135,7 +137,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.11-arm64.zip
         asset_name: polars-layer-3.11-arm64.zip
         asset_content_type: application/zip
@@ -143,7 +145,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.12-arm64.zip
         asset_name: polars-layer-3.12-arm64.zip
         asset_content_type: application/zip
@@ -151,7 +153,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ needs.create-upload-destination.outputs.upload_url }}
         asset_path: ./polars-layer-3.13-arm64.zip
         asset_name: polars-layer-3.13-arm64.zip
         asset_content_type: application/zip
