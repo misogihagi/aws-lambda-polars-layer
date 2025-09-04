@@ -28,19 +28,19 @@ jobs:
 
     - name: Docker イメージをビルドする
       run: |
-        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg=3.9-arm64
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg TAG=3.9-arm64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.9-arm64.zip
-        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg=3.10-arm64
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg TAG=3.10-arm64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.10-arm64.zip
-        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg=3.11-arm64
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/arm64 --build-arg TAG=3.11-arm64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.11-arm64.zip
-        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/arm64 --build-arg=3.12-arm64
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/arm64 --build-arg TAG=3.12-arm64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.12-arm64.zip
-        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/arm64 --build-arg=3.13-arm64
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/arm64 --build-arg TAG=3.13-arm64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.13-arm64.zip
 
@@ -96,19 +96,19 @@ jobs:
 
     - name: Docker イメージをビルドする
       run: |
-        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg=3.9-x86_64
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg TAG=3.9-x86_64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.9-x86_64.zip
-        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg=3.10-x86_64
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg TAG=3.10-x86_64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.10-x86_64.zip
-        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg=3.11-x86_64
+        docker build . -f Dockerfile-3.9-3.11 -t layer --platform linux/amd64 --build-arg TAG=3.11-x86_64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.11-x86_64.zip
-        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/amd64 --build-arg=3.12-x86_64
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/amd64 --build-arg TAG=3.12-x86_64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.12-x86_64.zip
-        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/amd64 --build-arg=3.13-x86_64
+        docker build . -f Dockerfile-3.12-3.13 -t layer --platform linux/amd64 --build-arg TAG=3.13-x86_64
         docker run -v `pwd`:/output layer
         mv layer.zip polars-layer-3.13-x86_64.zip
 
